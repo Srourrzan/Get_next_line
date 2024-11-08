@@ -6,7 +6,7 @@
 /*   By: gitpod <gitpod@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:48 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/07 18:57:06 by gitpod           ###   ########.fr       */
+/*   Updated: 2024/11/07 19:23:05 by gitpod           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,14 @@
 
 char *get_next_line(int fd)
 {
+    static char     *line[FD_MAX];
+    int read_size;
     
+    read_size = BUFFER_SIZE;
+    line[fd] = NULL;
+    while(read_size > 0)
+    {
+        
+    }
+    get_line(fd, line);
 }
