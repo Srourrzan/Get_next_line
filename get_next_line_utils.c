@@ -10,7 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 
 //manage_buffer
+char    *manage_buffer(int fd, char **line, int read_size)
+{
+    char    *buffer;
+    char    *temp;
+
+    temp = line[fd];
+    buffer = (char *)malloc(BUFFER_SIZE + 1);
+    if(buffer == NULL)
+    {
+        free(line[fd]);
+        return (NULL);
+    }
+    read_size = read(fd, buffer, BUFFER_SIZE);
+}
 
 //get_line

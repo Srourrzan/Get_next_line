@@ -21,7 +21,7 @@ char *get_next_line(int fd)
     line[fd] = NULL;
     while(read_size > 0)
     {
-        
+        manage_buffer(fd, line, read_size);
     }
     get_line(fd, line);
 }

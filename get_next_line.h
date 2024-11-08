@@ -27,5 +27,6 @@
 #include <stdlib.h>
 
 char *get_next_line(int fd);
+char    *manage_buffer(int fd, char **line, int read_size);
 
 #endif
