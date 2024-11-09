@@ -22,7 +22,7 @@ int	ft_strlen(char *str)
 	return (iter);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*joined_str;
 	size_t	len_s1;
@@ -44,7 +44,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (joined_str);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	char	*dup_str;
 	size_t	len;
@@ -64,7 +64,7 @@ char	*ft_strdup(const char *s1)
 	return (dup_str);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy(char *dst, char *src, size_t size)
 {
 	size_t	iter;
 	size_t	length;
@@ -86,7 +86,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (length);
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, char *src, size_t size)
 {
 	size_t	destlen;
 	size_t	iter;

@@ -15,18 +15,22 @@
 char	*get_next_line(int fd)
 {
 	static char	*line[FD_MAX];
-	int			read_size;
+	size_t			read_size;
 
-	read_size = BUFFER_SIZE;
 	line[fd] = NULL;
-	while (read_size > 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	if (BUFFER_SIZE > 0)
 	{
-		manage_buffer(fd, line, read_size);
+		read_size = manage_buffer(fd, line, size_t);
+		printf("line[%d]: %s\n", fd, line[fd]);
+		printf("read size = %ld\n", read_size);
 	}
-	get_line(fd, line);
+	//get_line(fd, line);
+	return ("Testing");
 }
 
-void    manage_buffer(int fd, char **line, int read_size)
+size_t    manage_buffer(int fd, char **line, size_t read_size)
 {
 	char	*buffer;
 	char	*temp;
@@ -36,21 +40,17 @@ void    manage_buffer(int fd, char **line, int read_size)
 	if (buffer == NULL)
 	{
 		free(line[fd]);
-		return (NULL);
+		return (0);
 	}
 	read_size = read(fd, buffer, BUFFER_SIZE);
-    if (read_size)
-    {
-        printf("read size = %d\n", read_size);
-    }
 	line[fd] = ft_strjoin(temp, buffer);
 	free(buffer);
 	free(temp);
+	return(read_size);
 }
 
-char    *get_line(fd, line)
+char    *get_line(int fd, char **line)
 {
-    fd = fd;
-    line = line;
+    printf("Inside get_line %d, %p\n", fd, line);
     return ("");
 }
