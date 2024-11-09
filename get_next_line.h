@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:43 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/09 09:44:00 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/09 11:52:14 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-char	*manage_buffer(int fd, char **line, int read_size);
+void	manage_buffer(int fd, char **line, int read_size);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
 
