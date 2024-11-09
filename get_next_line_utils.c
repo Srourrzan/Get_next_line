@@ -6,11 +6,21 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/09 10:45:49 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/09 12:12:15 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int	ft_strlen(char *str)
+{
+	int	iter;
+
+	iter = 0;
+	while (str[iter])
+		iter++;
+	return (iter);
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -54,21 +64,11 @@ char	*ft_strdup(const char *s1)
 	return (dup_str);
 }
 
-int	ft_strlen(char *str)
-{
-	int	iter;
-
-	iter = 0;
-	while (str[iter])
-		iter++;
-	return (iter);
-}
-
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t		iter;
-	size_t		length;
-	const char	*buffer;
+	size_t	iter;
+	size_t	length;
+	char	*buffer;
 
 	iter = 0;
 	buffer = src;
