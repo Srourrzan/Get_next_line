@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/09 10:26:23 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/09 10:34:31 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,26 @@ int	ft_strlen(char *str)
 	while (str[iter])
 		iter++;
 	return (iter);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t			iter;
+	size_t			length;
+	const char		*buffer;
+
+	iter = 0;
+	buffer = src;
+	length = ft_strlen(buffer);
+	if (!src)
+		return (0);
+	if (size == 0)
+		return (length);
+	while (iter < length && iter < (size - 1))
+	{
+		dst[iter] = buffer[iter];
+		iter++;
+	}
+	dst[iter] = '\0';
+	return (length);
 }
