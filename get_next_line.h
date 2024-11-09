@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitpod <gitpod@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:43 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/09 13:43:47 by gitpod           ###   ########.fr       */
+/*   Updated: 2024/11/09 18:52:31 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-size_t    manage_buffer(int fd, char **line, size_t read_size);
+char	*manage_buffer(int fd, char **line);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *s1);
 int		ft_strlen(char *str);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
 size_t	ft_strlcat(char *dst, char *src, size_t size);
-char    *get_line(int fd, char **line);
+char	*get_line(int fd, char **line);
 
 #endif

@@ -11,11 +11,8 @@ int main()
         return 1;
     }
     char *line;
-    while ((line = get_next_line(fd)) != NULL)
-    {
+    if ((get_next_line(fd)) != NULL)
         printf("Line: %s", line);
-        free(line);
-    }
     close(fd);
     return(0);
 }

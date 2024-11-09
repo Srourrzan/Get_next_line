@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:48 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/09 12:59:32 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/09 19:47:00 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,48 @@
 char	*get_next_line(int fd)
 {
 	static char	*line[FD_MAX];
-	size_t			read_size;
+	//size_t		read_size;
 
 	line[fd] = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (BUFFER_SIZE > 0)
-	{
-		read_size = manage_buffer(fd, line, size_t);
-		printf("line[%d]: %s\n", fd, line[fd]);
-		printf("read size = %ld\n", read_size);
-	}
-	//get_line(fd, line);
+	line[fd] = manage_buffer(fd, line);
+	if (line[fd] == NULL)
+		return (NULL);
+	printf("line[%d]: %s\n", fd, line[fd]);
+	//printf("read size = %ld\n", read_size);
 	return ("Testing");
 }
 
-size_t    manage_buffer(int fd, char **line, size_t read_size)
+char	*manage_buffer(int fd, char **line)
 {
 	char	*buffer;
-	char	*temp;
+	char	temp[BUFFER_SIZE + 1];
+	ssize_t	read_size;
+	size_t	iter;
 
-	temp = line[fd];
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
-	if (buffer == NULL)
+	iter = 0;
+	while ((read_size = read(fd, temp, BUFFER_SIZE + 1)) > 0)
 	{
-		free(line[fd]);
-		return (0);
+		temp[read_size] = '\0';
+		if(!line[fd])
+			line[fd] = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		buffer = ft_strjoin(line[fd], temp);
+		if (!buffer)
+			return (NULL);
+		line[fd] = buffer;
+		while (temp[iter] != '\0')
+		{
+			if (temp[iter] == '\n')
+				break;
+			iter++;
+		}
 	}
-	read_size = read(fd, buffer, BUFFER_SIZE);
-	line[fd] = ft_strjoin(temp, buffer);
-	free(buffer);
-	free(temp);
-	return(read_size);
+	return (*line);
 }
 
-char    *get_line(int fd, char **line)
+char	*get_line(int fd, char **line)
 {
-    printf("Inside get_line %d, %p\n", fd, line);
-    return ("");
+	printf("Inside get_line %d, %p\n", fd, line);
+	return ("");
 }
