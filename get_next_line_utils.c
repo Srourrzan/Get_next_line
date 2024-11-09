@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/09 09:47:32 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/09 10:26:23 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ char	*manage_buffer(int fd, char **line, int read_size)
 		return (NULL);
 	}
 	read_size = read(fd, buffer, BUFFER_SIZE);
+	line[fd] =  ft_strjoin(temp, buffer);
+	free(buffer);
+	free(temp);
 }
 
 // get_line
