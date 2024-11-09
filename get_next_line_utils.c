@@ -6,32 +6,12 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/09 10:44:59 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/09 10:45:49 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-// manage_buffer
-char	*manage_buffer(int fd, char **line, int read_size)
-{
-	char	*buffer;
-	char	*temp;
-
-	temp = line[fd];
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
-	if (buffer == NULL)
-	{
-		free(line[fd]);
-		return (NULL);
-	}
-	read_size = read(fd, buffer, BUFFER_SIZE);
-	line[fd] = ft_strjoin(temp, buffer);
-	free(buffer);
-	free(temp);
-}
-
-// get_line
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*joined_str;
