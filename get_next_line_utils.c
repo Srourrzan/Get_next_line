@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/09 10:34:31 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/09 10:44:59 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*manage_buffer(int fd, char **line, int read_size)
 		return (NULL);
 	}
 	read_size = read(fd, buffer, BUFFER_SIZE);
-	line[fd] =  ft_strjoin(temp, buffer);
+	line[fd] = ft_strjoin(temp, buffer);
 	free(buffer);
 	free(temp);
 }
@@ -76,7 +76,7 @@ char	*ft_strdup(const char *s1)
 
 int	ft_strlen(char *str)
 {
-	int iter;
+	int	iter;
 
 	iter = 0;
 	while (str[iter])
@@ -86,9 +86,9 @@ int	ft_strlen(char *str)
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t			iter;
-	size_t			length;
-	const char		*buffer;
+	size_t		iter;
+	size_t		length;
+	const char	*buffer;
 
 	iter = 0;
 	buffer = src;
@@ -104,4 +104,22 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	}
 	dst[iter] = '\0';
 	return (length);
+}
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	destlen;
+	size_t	iter;
+
+	destlen = ft_strlen(dst);
+	if (size <= destlen)
+		return (size + ft_strlen(src));
+	iter = 0;
+	while (src[iter] != '\0' && destlen + iter < size - 1)
+	{
+		dst[destlen + iter] = src[iter];
+		iter++;
+	}
+	dst[destlen + iter] = '\0';
+	return (ft_strlen(dst) + ft_strlen(&src[iter]));
 }
