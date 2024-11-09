@@ -53,9 +53,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*ft_strdup(const char *s1)
 {
-	char *dup_str;
-	size_t len;
-	int iter;
+	char	*dup_str;
+	size_t	len;
+	int		iter;
 
 	iter = 0;
 	len = ft_strlen(s1);
@@ -71,9 +71,9 @@ char	*ft_strdup(const char *s1)
 	return (dup_str);
 }
 
-int		ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int		iter;
+	int iter;
 
 	iter = 0;
 	while (str[iter])
