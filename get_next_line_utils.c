@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/10 21:42:54 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/10 22:02:01 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,31 @@ char	*ft_find_newline(const char *s)
 	if (s[i] == '\\' && s[i + 1] == 'n')
 		return((char *)&s[i]);
 	return (NULL);
+}
+
+char	*get_rest_line(char *line)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	j = 0;
+	while(line[i] && !(line[i] == '\\' && line[i + 1] == 'n'))
+		i++;
+	if (!line[i])
+	{
+		free(line);
+		return (NULL);
+	}
+	str = (char *)malloc(sizeof(char) * (ft_strlen(line) - i));
+	if (!str)
+		return (NULL);
+	i += 2;
+	while (line[i])
+		str[j++] = line[i++];
+	str[j] = '\0';
+	printf("remaining: %s\n", str);
+	free(line);
+	return(str);
 }

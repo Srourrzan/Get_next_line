@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:48 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/10 21:47:57 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/10 21:51:13 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*get_next_line(int fd)
 	if (line == NULL)
 		return (NULL);
 	p_line = get_line(line);
+	line = get_rest_line(line);
 	return (p_line);
 }
 
