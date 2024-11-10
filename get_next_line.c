@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:48 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/10 19:12:38 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/10 21:15:43 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,29 @@ char	*get_next_line(int fd)
 
 char	*manage_buffer(int fd, char **line)
 {
-	char	temp[BUFFER_SIZE + 1];
+	char	*temp;
 	ssize_t	read_size;
 
-	while ((read_size = read(fd, temp, BUFFER_SIZE + 1)) > 0)
+	printf("allocaring temp\n");
+	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!temp)
+		return (NULL);
+	read_size = 1;
+	while (!ft_find_newline(line[fd]) && read_size > 0)
 	{
-		temp[read_size] = '\0';
-		if(!line[fd])
-			line[fd] = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		line[fd] = ft_strjoin(line[fd], temp);
-		if (!line[fd])
+		printf("reading file...\n");
+		read_size = read(fd, temp, BUFFER_SIZE);
+		if(read_size == -1)
+		{
+			free(temp);
 			return (NULL);
-		if (ft_strchr(line[fd], '\n'))
-			break;
+		}
+		temp[read_size] = '\0';
+		line[fd] = ft_strjoin(line[fd], temp);
+		printf("newline? %s\n", ft_find_newline(line[fd]));
 	}
+	printf("line[fd]: %s\n", line[fd]);
+	free(temp);
 	return (line[fd]);
 }
 
@@ -53,16 +62,21 @@ char	*get_line(char *line)
 	//size_t	len;
 	
 	printf("passed line: %s\n", line);
-	newline_pos = ft_strchr(line, '\n');
+	newline_pos = ft_find_newline(line);
 	printf("newline: %s\n", newline_pos);
 	return (newline_pos);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_find_newline(const char *s)
 {
-	while(*s != '\0' && *s != (unsigned char)c)
-		s++;
-	if (*s == (unsigned char)c)
-		return ((char *)s);
+	int		i;
+
+	i = 0;
+	if(!s)
+		return (NULL);
+	while (s[i] != '\0' && s[i] != '\\')
+		i++;
+	if (s[i] == '\\' && s[i + 1] == 'n')
+		return((char *)&s[i]);
 	return (NULL);
 }
