@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:48 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/10 21:15:43 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/10 21:40:58 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,27 @@ char	*manage_buffer(int fd, char **line)
 
 char	*get_line(char *line)
 {
-	//char	*buffer = "Razan\nSrour";
-	char	*newline_pos;
-	//size_t	len;
-	
-	printf("passed line: %s\n", line);
-	newline_pos = ft_find_newline(line);
-	printf("newline: %s\n", newline_pos);
-	return (newline_pos);
-}
-
-char	*ft_find_newline(const char *s)
-{
+	int		len;
+	char	*str;
 	int		i;
 
 	i = 0;
-	if(!s)
+	len = 0;
+	if(!line[len])
 		return (NULL);
-	while (s[i] != '\0' && s[i] != '\\')
+	while (line[len] && !(line[len] == '\\' && line[len + 1] == 'n'))
+		len++;
+	str = (char *)malloc(sizeof(char) * (i + 2));
+	if (!str)
+		return(NULL);
+	while (line[i] && i < len)
+	{
+		str[i] = line[i];
 		i++;
-	if (s[i] == '\\' && s[i + 1] == 'n')
-		return((char *)&s[i]);
-	return (NULL);
+	}
+	printf("\n");
+	if (line[i] == '\\' && line[i+1] == 'n')
+		str[i++] = '\n';
+	str[i] = '\0';
+	return(str);
 }
