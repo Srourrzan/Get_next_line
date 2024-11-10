@@ -15,7 +15,7 @@
 char	*get_next_line(int fd)
 {
 	static char	*line[FD_MAX];
-	//size_t		read_size;
+	char		*p_line;
 
 	line[fd] = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -26,6 +26,7 @@ char	*get_next_line(int fd)
 	if (line[fd] == NULL)
 		return (NULL);
 	printf("line[%d]: %s\n", fd, line[fd]);
+	p_line = get_line(fd, line);
 	return ("Testing");
 }
 
@@ -61,4 +62,17 @@ char	*get_line(int fd, char **line)
 {
 	printf("Inside get_line %d, %p\n", fd, line);
 	return ("");
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if (c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
