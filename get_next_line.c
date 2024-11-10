@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:48 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/10 21:51:13 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/10 22:12:11 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	*get_next_line(int fd)
 	static char	*line;
 	char		*p_line;
 
-	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = manage_buffer(fd, line);
@@ -33,14 +32,12 @@ char	*manage_buffer(int fd, char *line)
 	char	*temp;
 	ssize_t	read_size;
 
-	printf("allocaring temp\n");
 	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!temp)
 		return (NULL);
 	read_size = 1;
 	while (!ft_find_newline(line) && read_size > 0)
 	{
-		printf("reading file...\n");
 		read_size = read(fd, temp, BUFFER_SIZE);
 		if(read_size == -1)
 		{
@@ -49,9 +46,7 @@ char	*manage_buffer(int fd, char *line)
 		}
 		temp[read_size] = '\0';
 		line = ft_strjoin(line, temp);
-		printf("newline? %s\n", ft_find_newline(line));
 	}
-	printf("line: %s\n", line);
 	free(temp);
 	return (line);
 }
@@ -76,7 +71,6 @@ char	*get_line(char *line)
 		str[i] = line[i];
 		i++;
 	}
-	printf("\n");
 	if (line[i] == '\\' && line[i+1] == 'n')
 		str[i++] = '\n';
 	str[i] = '\0';
