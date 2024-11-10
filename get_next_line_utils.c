@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/09 12:12:15 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/10 21:42:54 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,82 +24,41 @@ int	ft_strlen(char *str)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*joined_str;
-	size_t	len_s1;
-	size_t	len_s2;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
-	if (!s1 && !s2)
-		return (ft_strdup(""));
-	if (s1 && !s2)
-		return (ft_strdup(s1));
-	if (!s1 && s2)
-		return (ft_strdup(s2));
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	joined_str = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
-	if (!joined_str)
+	i = -1;
+	j = 0;
+	if (!s1)
+	{
+		s1 = (char *)malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
+	if (!s1 || !s2)
 		return (NULL);
-	ft_strlcpy(joined_str, s1, len_s1 + 1);
-	ft_strlcat(joined_str, s2, len_s1 + len_s2 + 1);
-	return (joined_str);
-}
-
-char	*ft_strdup(char *s1)
-{
-	char	*dup_str;
-	size_t	len;
-	int		iter;
-
-	iter = 0;
-	len = ft_strlen(s1);
-	dup_str = (char *)malloc((len + 1) * sizeof(char));
-	if (!dup_str)
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (str == NULL)
 		return (NULL);
-	while (s1[iter] != '\0')
-	{
-		dup_str[iter] = s1[iter];
-		iter++;
-	}
-	dup_str[iter] = '\0';
-	return (dup_str);
+	while (s1[++i] != '\0')
+		str[i] = s1[i];
+	while (s2[j] != '\0')
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	free(s1);
+	return (str);
 }
 
-size_t	ft_strlcpy(char *dst, char *src, size_t size)
+char	*ft_find_newline(const char *s)
 {
-	size_t	iter;
-	size_t	length;
-	char	*buffer;
+	int		i;
 
-	iter = 0;
-	buffer = src;
-	length = ft_strlen(buffer);
-	if (!src)
-		return (0);
-	if (size == 0)
-		return (length);
-	while (iter < length && iter < (size - 1))
-	{
-		dst[iter] = buffer[iter];
-		iter++;
-	}
-	dst[iter] = '\0';
-	return (length);
-}
-
-size_t	ft_strlcat(char *dst, char *src, size_t size)
-{
-	size_t	destlen;
-	size_t	iter;
-
-	destlen = ft_strlen(dst);
-	if (size <= destlen)
-		return (size + ft_strlen(src));
-	iter = 0;
-	while (src[iter] != '\0' && destlen + iter < size - 1)
-	{
-		dst[destlen + iter] = src[iter];
-		iter++;
-	}
-	dst[destlen + iter] = '\0';
-	return (ft_strlen(dst) + ft_strlen(&src[iter]));
+	i = 0;
+	if(!s)
+		return (NULL);
+	while (s[i] != '\0' && s[i] != '\\')
+		i++;
+	if (s[i] == '\\' && s[i + 1] == 'n')
+		return((char *)&s[i]);
+	return (NULL);
 }
