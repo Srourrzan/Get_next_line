@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:48 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/10 21:40:58 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/10 21:47:57 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*line[FD_MAX];
+	static char	*line;
 	char		*p_line;
 
-	line[fd] = NULL;
+	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line[fd] = manage_buffer(fd, line);
-	if (line[fd] == NULL)
+	line = manage_buffer(fd, line);
+	if (line == NULL)
 		return (NULL);
-	p_line = get_line(line[fd]);
+	p_line = get_line(line);
 	return (p_line);
 }
 
-char	*manage_buffer(int fd, char **line)
+char	*manage_buffer(int fd, char *line)
 {
 	char	*temp;
 	ssize_t	read_size;
@@ -37,7 +37,7 @@ char	*manage_buffer(int fd, char **line)
 	if (!temp)
 		return (NULL);
 	read_size = 1;
-	while (!ft_find_newline(line[fd]) && read_size > 0)
+	while (!ft_find_newline(line) && read_size > 0)
 	{
 		printf("reading file...\n");
 		read_size = read(fd, temp, BUFFER_SIZE);
@@ -47,12 +47,12 @@ char	*manage_buffer(int fd, char **line)
 			return (NULL);
 		}
 		temp[read_size] = '\0';
-		line[fd] = ft_strjoin(line[fd], temp);
-		printf("newline? %s\n", ft_find_newline(line[fd]));
+		line = ft_strjoin(line, temp);
+		printf("newline? %s\n", ft_find_newline(line));
 	}
-	printf("line[fd]: %s\n", line[fd]);
+	printf("line: %s\n", line);
 	free(temp);
-	return (line[fd]);
+	return (line);
 }
 
 char	*get_line(char *line)

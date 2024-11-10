@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:43 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/10 21:42:10 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/10 21:48:03 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <string.h>
 
 char	*get_next_line(int fd);
-char	*manage_buffer(int fd, char **line);
+char	*manage_buffer(int fd, char *line);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);
 char	*get_line(char *line);
