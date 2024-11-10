@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:43 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/09 18:52:31 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/10 17:37:34 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int		ft_strlen(char *str);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
 size_t	ft_strlcat(char *dst, char *src, size_t size);
 char	*get_line(int fd, char **line);
+char	*ft_strchr(const char *s, int c);
 
 #endif
