@@ -11,7 +11,7 @@ int main()
         return 1;
     }
     char *line;
-    if ((get_next_line(fd)) != NULL)
+    if ((line = get_next_line(fd)) != NULL)
         printf("Line: %s", line);
     close(fd);
     return(0);

@@ -21,10 +21,11 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line[fd] = manage_buffer(fd, line);
+	printf("The value is returned to get_next_line");
+	printf("line[fd] = %s\n", line[fd]);
 	if (line[fd] == NULL)
 		return (NULL);
 	printf("line[%d]: %s\n", fd, line[fd]);
-	//printf("read size = %ld\n", read_size);
 	return ("Testing");
 }
 
@@ -51,8 +52,9 @@ char	*manage_buffer(int fd, char **line)
 				break;
 			iter++;
 		}
+		printf("line[fd] = %s\n", line[fd]);
 	}
-	return (*line);
+	return (line[fd]);
 }
 
 char	*get_line(int fd, char **line)
