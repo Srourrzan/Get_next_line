@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/10 22:07:43 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/10 22:15:18 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ char	*get_rest_line(char *line)
 	while (line[i])
 		str[j++] = line[i++];
 	str[j] = '\0';
-	printf("remaining: %s\n", str);
 	free(line);
 	return(str);
 }
