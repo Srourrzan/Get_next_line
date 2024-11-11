@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:43 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/10 22:17:31 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/11 12:45:41 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_next_line(int fd);
 char	*manage_buffer(int fd, char *line);
 char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);
-char	*get_line(char *line);
+char	*ft_get_line(char *line);
 char	*ft_find_newline(const char *s);
 char	*get_rest_line(char *line);
 

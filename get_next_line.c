@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:48 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/10 22:12:11 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/11 12:45:48 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_next_line(int fd)
 	line = manage_buffer(fd, line);
 	if (line == NULL)
 		return (NULL);
-	p_line = get_line(line);
+	p_line = ft_get_line(line);
 	line = get_rest_line(line);
 	return (p_line);
 }
@@ -51,7 +51,7 @@ char	*manage_buffer(int fd, char *line)
 	return (line);
 }
 
-char	*get_line(char *line)
+char	*ft_get_line(char *line)
 {
 	int		len;
 	char	*str;
@@ -61,7 +61,7 @@ char	*get_line(char *line)
 	len = 0;
 	if(!line[len])
 		return (NULL);
-	while (line[len] && !(line[len] == '\\' && line[len + 1] == 'n'))
+	while (line[len] && line[len] != '\n')
 		len++;
 	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
@@ -71,8 +71,8 @@ char	*get_line(char *line)
 		str[i] = line[i];
 		i++;
 	}
-	if (line[i] == '\\' && line[i+1] == 'n')
-		str[i++] = '\n';
+	if (line[len] == '\n')
+		str[i++] = line[len];
 	str[i] = '\0';
 	return(str);
 }
