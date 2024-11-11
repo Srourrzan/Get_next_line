@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/10 22:15:18 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/11 12:40:41 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,15 @@ char	*ft_find_newline(const char *s)
 	int		i;
 
 	i = 0;
-	if(!s)
+	if (!s)
 		return (NULL);
-	while (s[i] != '\0' && s[i] != '\\')
+	while (s[i] != '\0')
+	{
+		if (s[i] == (char) '\n')
+			return ((char *)&s[i]);
 		i++;
-	if (s[i] == '\\' && s[i + 1] == 'n')
-		return((char *)&s[i]);
-	return (NULL);
+	}
+	return (0);
 }
 
 char	*get_rest_line(char *line)
@@ -71,7 +73,7 @@ char	*get_rest_line(char *line)
 
 	i = 0;
 	j = 0;
-	while(line[i] && !(line[i] == '\\' && line[i + 1] == 'n'))
+	while(line[i] && line[i] != '\n')
 		i++;
 	if (!line[i])
 	{
