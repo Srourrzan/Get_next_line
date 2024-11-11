@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/11 16:08:34 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/11 19:33:45 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	ft_strlen(char *str)
 {
 	size_t	iter;
-
+	if(!str && !*str)
+		return (-1);
 	iter = 0;
 	while (str[iter])
 		iter++;
@@ -33,6 +34,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1)
 	{
 		s1 = (char *)malloc(sizeof(char) * 1);
+		if(!s1)
+		{
+			return (NULL);
+		}
 		s1[0] = '\0';
 	}
 	if (!s1 || !s2)
@@ -51,7 +56,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 char	*ft_find_newline(const char *s)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	if (!s)
@@ -59,7 +64,7 @@ char	*ft_find_newline(const char *s)
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char) '\n')
-			return ((char *)&s[i]);
+			return ((char *) &s[i]);
 		i++;
 	}
 	return (0);
@@ -67,13 +72,13 @@ char	*ft_find_newline(const char *s)
 
 char	*get_rest_line(char *line)
 {
-	size_t		i;
-	size_t		j;
+	size_t	i;
+	size_t	j;
 	char	*str;
 
 	i = 0;
 	j = 0;
-	while(line[i] && line[i] != '\n')
+	while (line[i] && line[i] != '\n')
 		i++;
 	if (!line[i])
 	{
@@ -82,11 +87,14 @@ char	*get_rest_line(char *line)
 	}
 	str = (char *)malloc(sizeof(char) * (ft_strlen(line) - i));
 	if (!str)
+	{
+		free(line);
 		return (NULL);
+	}
 	i++;
 	while (line[i])
 		str[j++] = line[i++];
 	str[j] = '\0';
 	free(line);
-	return(str);
+	return (str);
 }
