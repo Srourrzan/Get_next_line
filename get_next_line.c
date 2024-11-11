@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:48 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/11 12:45:48 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/11 16:08:27 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ char	*manage_buffer(int fd, char *line)
 	char	*temp;
 	ssize_t	read_size;
 
+	read_size = 1;
 	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!temp)
+	{
 		return (NULL);
-	read_size = 1;
-	while (!ft_find_newline(line) && read_size > 0)
+	}
+	while (!ft_find_newline(line) && read_size != 0)
 	{
 		read_size = read(fd, temp, BUFFER_SIZE);
 		if(read_size == -1)
@@ -53,26 +55,25 @@ char	*manage_buffer(int fd, char *line)
 
 char	*ft_get_line(char *line)
 {
-	int		len;
 	char	*str;
-	int		i;
+	size_t		i;
 
 	i = 0;
-	len = 0;
-	if(!line[len])
+	if(!line[i])
 		return (NULL);
-	while (line[len] && line[len] != '\n')
-		len++;
+	while (line[i] && line[i] != '\n')
+		i++;
 	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return(NULL);
-	while (line[i] && i < len)
+	i = 0;
+	while (line[i] && line[i] != '\n')
 	{
 		str[i] = line[i];
 		i++;
 	}
-	if (line[len] == '\n')
-		str[i++] = line[len];
-	str[i] = '\0';
+	if(line[i] == '\n')
+		str[i] = line[i]; 
+	str[++i] = '\0';
 	return(str);
 }

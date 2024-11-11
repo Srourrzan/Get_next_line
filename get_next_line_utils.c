@@ -6,7 +6,7 @@
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/11 12:40:41 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/11 16:08:34 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strlen(char *str)
 {
-	int	iter;
+	size_t	iter;
 
 	iter = 0;
 	while (str[iter])
@@ -51,7 +51,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 char	*ft_find_newline(const char *s)
 {
-	int		i;
+	size_t		i;
 
 	i = 0;
 	if (!s)
@@ -67,8 +67,8 @@ char	*ft_find_newline(const char *s)
 
 char	*get_rest_line(char *line)
 {
-	int		i;
-	int		j;
+	size_t		i;
+	size_t		j;
 	char	*str;
 
 	i = 0;
@@ -83,7 +83,7 @@ char	*get_rest_line(char *line)
 	str = (char *)malloc(sizeof(char) * (ft_strlen(line) - i));
 	if (!str)
 		return (NULL);
-	i += 2;
+	i++;
 	while (line[i])
 		str[j++] = line[i++];
 	str[j] = '\0';
