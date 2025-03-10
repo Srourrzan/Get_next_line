@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:49:48 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/11 19:41:00 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/11 19:44:31 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
+	static char	*line[FD_MAX];
 	char		*p_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = manage_buffer(fd, line);
-	if (line == NULL)
+	line[fd] = manage_buffer(fd, line[fd]);
+	if (line[fd] == NULL)
 		return (NULL);
-	p_line = ft_get_line(line);
-	line = get_rest_line(line);
+	p_line = ft_get_line(line[fd]);
+	line[fd] = get_rest_line(line[fd]);
 	return (p_line);
 }
 

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rsrour <rsrour@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:50:07 by gitpod            #+#    #+#             */
-/*   Updated: 2024/11/11 20:51:55 by rsrour           ###   ########.fr       */
+/*   Updated: 2024/11/11 20:51:34 by rsrour           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(char *str)
 {
@@ -61,7 +61,7 @@ char	*ft_find_newline(const char *s)
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char) '\n')
-			return ((char *) &s[i]);
+			return ((char *)&s[i]);
 		i++;
 	}
 	return (0);
